@@ -1,10 +1,11 @@
 import datetime
 from peewee import *
-
+import os 
+from flask import jsonify 
 from flask_login import UserMixin
 from flask_bcrypt import generate_password_hash
 
-DATABASE = SqliteDatabase('mom.db')
+DATABASE = SqliteDatabase('mom.db') #sets db variable for development
 
 class User(UserMixin, Model):
     username = CharField(unique=True)
@@ -28,10 +29,23 @@ class User(UserMixin, Model):
                 password = generate_password_hash(password),
                 location = location,
                 image_filename = image_filename,
-                image_url = image_url 
+                image_url = image_url
+            ) 
                 
         except IntegrityError:
             raise ValueError("User already exists")
+
+    @classmethod
+    def edit_user(cls, username, email, password, location):
+        try:
+            cls.create(
+                username = username,
+                email = email,
+                password = generate_password_hash(password),
+                location = location 
+            )
+        except IntegrityError:
+            raise ValueError("edit error")
             
 class Resources(Model):
     #???ID??
@@ -47,7 +61,28 @@ class Resources(Model):
         order_by = ['-timestamp']
 
 @classmethod
-def create_resource(cls, category, title, content, timestamp, userId):
+def create_resource(cls, category, title, content, timestamp, userId): #??Add ID???
+    try:
+        cls.create(
+            category = category,
+            title = title,
+            content = content,
+            timestamp = timestamp,
+            userId = userId
+        )
+    
+    except IntegrityError:
+        raise ValueError("create resource error")   
+
+class SaveResources(Model):
+    userId = ForeignKeyField(User)
+    resourceId = ForeignKeyField(Resource) 
+    timestamp = DateTimeField(default=datetime.now())
+
+    class Meta:
+        database = DATABASE
+        db_table =  'savedResources'
+        order_by = ['-timestamp']
 
 
 
