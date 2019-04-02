@@ -46,9 +46,18 @@ def index():
 def about():
     return render_template('about.html')
 
-@app.route('/signup')
+@app.route('/signup', methods=('GET', 'POST'))
 def signup():
-    return render_template('signup.html')
+    form = forms.SignUpForm()
+    if form.validate_on_submit():
+        flash('Sign Up Success!')
+        models.User.create_user(
+            username=form.username.data,
+            email=form.email.data,
+            password=form.password.data 
+            )
+        return redirect(url_for('index'))
+    return render_template('signup.html', form=form) 
 
 
 if __name__ == '__main__':
