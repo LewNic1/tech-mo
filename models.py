@@ -12,7 +12,7 @@ class User(UserMixin, Model):
     email = CharField(unique=True)
     password = CharField(max_length=100)
     location = TextField()
-    image_filename = Charfield() 
+    image_filename = CharField() 
     image_url = CharField() 
     
     class Meta:
@@ -52,7 +52,7 @@ class Resources(Model):
     category = CharField()
     title = CharField()
     content = TextField()
-    timestamp = DateTimeField(default=datetime.now())
+    timestamp = DateTimeField(default=datetime.datetime.now())
     userId  = ForeignKeyField(User, backref="resources")
     
     class Meta:
@@ -74,10 +74,10 @@ def create_resource(cls, category, title, content, timestamp, userId): #??Add ID
     except IntegrityError:
         raise ValueError("create resource error")   
 
-class SaveResources(Model):
+class SavedResources(Model):
     userId = ForeignKeyField(User)
-    resourceId = ForeignKeyField(Resource) 
-    timestamp = DateTimeField(default=datetime.now())
+    resourceId = ForeignKeyField(Resources) 
+    timestamp = DateTimeField(default=datetime.datetime.now())
 
     class Meta:
         database = DATABASE
