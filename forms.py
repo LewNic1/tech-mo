@@ -19,5 +19,22 @@ class SignUpForm(Form):
            ),
            name_exists
         ])
-    
+    email = StringField(
+        'Email',
+        validators=[
+            DataRequired(),
+            Email(),
+            email_exists
+        ])
+    password = PasswordField(
+        'Password',
+        validators=[
+            DataRequired(),
+            Length(min=5),
+            EqualTo('password2', message='Password must match!')
+        ])
+    password2 = PasswordField(
+        'Confirm Password',
+        validators=[DataRequired()]
+    )
    
