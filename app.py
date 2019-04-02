@@ -1,5 +1,6 @@
 from flask import Flask, g 
 from flask import render_template, flash, redirect, url_for
+from app import app 
 import json 
 
 DEBUG = True
@@ -16,6 +17,8 @@ def index():
 @app.route('/about')
 def about():
     return render_template('about.html')
+
+@app.route('/signup')
 
 
 
