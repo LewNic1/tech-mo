@@ -1,7 +1,7 @@
 import datetime
 from peewee import *
-import os 
-from flask import jsonify 
+# import os 
+# from flask import jsonify 
 from flask_login import UserMixin
 from flask_bcrypt import generate_password_hash
 
@@ -12,8 +12,8 @@ class User(UserMixin, Model):
     email = CharField(unique=True)
     password = CharField(max_length=100)
     location = TextField()
-    image_filename = Charfield()
-    image_url = CharField 
+    image_filename = Charfield() 
+    image_url = CharField() 
     
     class Meta:
         database = DATABASE
