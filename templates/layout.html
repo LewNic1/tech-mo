@@ -1,32 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-   
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.css"
-    />
-    <link rel="stylesheet" type="text/css" href="/static/style.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-  
-    <title>TechMo</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
+    <title>TECHMO | TechMOMS | TechMORE</title>
+
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.css">
+    <!-- Animations-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+    <!-- Our CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
   </head>
-
-  <body>
-    <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand">
-        <a class="navbar-item " href="{{url_for('index')}}">
-          <img src="https://i.imgur.com/sdO8tAw.png" width="50" height="100" />
-          <h3>resources</h3>
-        </a>
-        <a
-          role="button"
-          class="navbar-burger burger"
-          aria-label="menu"
-          aria-expanded="false"
-          data-target="navbarBasicExample"
-        >
+  <body class="has-navbar-fixed-top">
+    <nav class="navbar is-light is-fixed-top" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand ">
+        <!-- Logo -->
+        <a href="{{ url_for('index') }}" class="navbar-item center"><img src="{{ url_for('static', filename='rolling-pin.png') }}"></a>
+        <!-- Hamburger bar for responsive nav -->
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
@@ -34,30 +29,60 @@
       </div>
 
       <div id="navbarBasicExample" class="navbar-menu">
-        <div class="navbar-start">
-          <a class="navbar-item">
-            Welcome
-          </a>
-        </div>
-
         <div class="navbar-end">
-          <div class="navbar-item">
-            <div class="buttons">
-              <a class="button is-light" href="" title="login">Login</a>
-              <a class="button is-primary" href="" title="register"
-                ><strong>Sign up</strong></a
-              >
+          <a href="{{ url_for('about') }}" class="navbar-item nav-links">ABOUT</a>
+
+          {% if current_user.is_anonymous %}
+          <!-- If user is not logged in, show Signin/Signup button -->
+            <div class="navbar-item">
+              <div class="buttons">
+                <a href="{{ url_for('signin') }}" class="button is-light nav-links" title="signin">SIGN IN</a>
+
+                <a href="{{ url_for('signup') }}" class="button is-light nav-links" title="signup">SIGN UP</a>
+
+              </div>
             </div>
-          </div>
+          
+          {% else %}
+          <!-- If user is logged in, show other pages -->
+            <a href="{{ url_for ('resources') }}" class="navbar-item">RESOURCES</a>
+
+            <a href="{{ url_for('profile', username=current_user.username) }}" class="navbar-item nav-links">PROFILE</a>
+
+            <a href="{{ url_for('logout') }}" class="navbar-item nav-links">LOGOUT</a>
+          
+          {% endif %}
         </div>
       </div>
     </nav>
-    <br />
-    <div class="columns">
-      <div class="column">
-        {% block content %} {% endblock %}
+
+    <section class="content">
+      {% block content %}
+
+      {% endblock %}
+    </section>
+
+    <footer class="footer">
+      <div class="content ">
+        <p class="has-text-right">&copy; TECHMO 2019. 
+        Made with &#x2661; by Nicolette Lewis</p>
       </div>
-      <div class="column"></div>
-    </div>
+    </footer>
+
+    <!-- Vendor Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.9"></script>
+    <script>
+      var typed = new Typed('#typed', {
+        stringsElement: '#typed-strings',
+        typeSpeed: 70,
+        backSpeed: 40,
+        smartBackspace: true,
+        loop: true,
+        loopCount: Infinity,
+      });
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
   </body>
+
 </html>
