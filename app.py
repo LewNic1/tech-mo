@@ -60,6 +60,24 @@ def SignUpForm():
         return redirect(url_for('index'))
     return render_template('signup.html', form=form) 
 
+@app.route('/signin', methods=('GET', 'POST'))
+def signin():
+    form = forms.SignInForm()
+    if form.validate_on_submit():
+        try:
+            user = models.User.get(models.User.email == form.email.data)
+        except models.DoesNotExist:
+            flash("Error", "Password or email is incorrect") 
+        else:
+            if check_password_hash(user.password, form.password.data): 
+                login_user(user) #session created
+                flash("sign in success!")
+                return redirect(url_for('index'))
+            else:
+                flash("Error", "Passeord or email is incorrect")
+    return render_template('signin.html', form=form) 
+
+
 
 if __name__ == '__main__':
     models.initialize()
