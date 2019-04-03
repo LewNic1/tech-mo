@@ -1,11 +1,15 @@
 from flask_wtf import FlaskForm as Form 
 from models import User
 from wtforms import StringField, PasswordField, TextAreaField
-from wtforms.validators import (DataRequired, Regexp, ValidationError, Email, Length,EqualTo)
+from wtforms.validators import (DataRequired, Regexp, ValidationError, Email, Length, EqualTo)
 
 def name_exists(form, field):
     if User.select().where(User.username == field.data).exists():
         raise ValidationError('User already exists. Try again!')
+
+def email_exists(form,field):
+    if User.select().where(User.email == field.data).exits():
+        raise ValidationError('That email already exists.')
 
 class SignUpForm(Form):
     username = StringField(
@@ -15,7 +19,7 @@ class SignUpForm(Form):
            Regexp(
                r'^[a-zA-Z0-9_]+$',
                 message=("Username invalid. Use letters, "
-                         "numbers, and underscores only.")
+                         "numbers 0-9, and underscores only.")
            ),
            name_exists
         ])
@@ -25,7 +29,7 @@ class SignUpForm(Form):
             DataRequired(),
             Email(),
             email_exists
-        ])
+        ]) 
     password = PasswordField(
         'Password',
         validators=[

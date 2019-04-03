@@ -47,7 +47,7 @@ def about():
     return render_template('about.html')
 
 @app.route('/signup', methods=('GET', 'POST'))
-def signup():
+def SignUpForm():
     form = forms.SignUpForm()
     if form.validate_on_submit():
         flash('Sign Up Success!')
@@ -56,6 +56,7 @@ def signup():
             email=form.email.data,
             password=form.password.data 
             )
+        
         return redirect(url_for('index'))
     return render_template('signup.html', form=form) 
 
