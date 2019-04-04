@@ -48,12 +48,11 @@ class User(UserMixin, Model):
             raise ValueError("edit error")
             
 class Resources(Model):
-    #???ID??
     category = CharField()
     title = CharField()
     content = TextField()
     timestamp = DateTimeField(default=datetime.datetime.now())
-    userId  = ForeignKeyField(User, backref="resources")
+    user = ForeignKeyField(User, backref="resources")
     
     class Meta:
         database = DATABASE
@@ -68,15 +67,15 @@ def create_resource(cls, category, title, content, timestamp, userId): #??Add ID
             title = title,
             content = content,
             timestamp = timestamp,
-            userId = userId
+            user = user
         )
     
     except IntegrityError:
         raise ValueError("create resource error")   
 
 class SavedResources(Model):
-    userId = ForeignKeyField(User)
-    resourceId = ForeignKeyField(Resources) 
+    user = ForeignKeyField(User)
+    resource = ForeignKeyField(Resources) 
     timestamp = DateTimeField(default=datetime.datetime.now())
 
     class Meta:

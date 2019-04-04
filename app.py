@@ -13,7 +13,7 @@ DEBUG = True
 PORT = 8000
 
 app = Flask(__name__, instance_relative_config=True) 
-app.config.from_pyfile('flask.ctg')
+# app.config.from_pyfile('flask.ctg')
 app.secret_key = 'molokai'
 
 
@@ -54,7 +54,7 @@ def about():
     return render_template('about.html')
 
 @app.route('/signup', methods=['GET', 'POST'])
-def SignUp():
+def signup():
     form = forms.SignUpForm()
     if form.validate_on_submit():
         # filename = images.save(request.files['profile_image'])
@@ -63,11 +63,11 @@ def SignUp():
         models.User.create_user(
             username=form.username.data,
             email=form.email.data,
-            password=form.password.data 
-            location=form.location.data
+            password=form.password.data, 
+            location=form.location.data)
             # image_filename=filename,
             # image_url=url
-            )
+            
         user = models.User.get(models.User.username == form.username.data)
         login_user(user)
         name = user.username
@@ -75,7 +75,7 @@ def SignUp():
         return redirect(url_for('profile', username=name))
     return render_template('signup.html', form=form) 
 
-@app.route('/signin', methods=('GET', 'POST'))
+@app.route('/signin', methods=['GET', 'POST'])  
 def signin():
     form = forms.SignInForm()
     if form.validate_on_submit():
@@ -87,7 +87,7 @@ def signin():
             if check_password_hash(user.password, form.password.data): 
                 login_user(user) #session created
                 flash("sign in success!")
-                return redirect(url_for('index'))
+                return redirect(url_for('profile', username=user.username))
             else:
                 flash("Error", "Passeord or email is incorrect")
     return render_template('signin.html', form=form) 

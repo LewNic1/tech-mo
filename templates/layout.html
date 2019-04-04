@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>TECHMO | TechMOMS | TechMORE</title>
+    <title>TechMo | TechMoms | TechMore</title>
 
     <!-- Bulma CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.css">
@@ -30,16 +30,17 @@
 
       <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-end">
-          <a href="{{ url_for('about') }}" class="navbar-item nav-links">ABOUT</a>
+          
 
           {% if current_user.is_anonymous %}
           <!-- If user is not logged in, show Signin/Signup button -->
             <div class="navbar-item">
               <div class="buttons">
-                <a href="{{ url_for('signin') }}" class="button is-light nav-links" title="signin">SIGN IN</a>
+              <a href="{{ url_for('about') }}" class="button is-light nav-links" title="about">ABOUT</a>  
+              <a href="{{ url_for('signin') }}" class="button is-light nav-links" title="signin">SIGN IN</a>
+              <a href="{{ url_for('signup') }}" class="button is-light nav-links" title="signup">SIGN UP</a> 
 
-                <a href="{{ url_for('signup') }}" class="button is-light nav-links" title="signup">SIGN UP</a>
-
+                
               </div>
             </div>
           
@@ -64,7 +65,7 @@
 
     <footer class="footer">
       <div class="content ">
-        <p class="has-text-right">&copy; TECHMO 2019. 
+        <p class="has-text-right">&copy; TechMo 2019. 
         Made with &#x2661; by Nicolette Lewis</p>
       </div>
     </footer>
