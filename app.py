@@ -2,7 +2,7 @@ from flask import Flask, g, request
 from flask import render_template, flash, redirect, url_for, session, escape 
 from flask_login import LoginManager, login_user, login_required, current_user, logout_user
 from flask_bcrypt import check_password_hash
-from werkzeug.urls import url_parse 
+from werkzeug.urls import url_parse #redirect user if not signed in
 
 # import json 
 import models
@@ -89,8 +89,29 @@ def signin():
                 flash("sign in success!")
                 return redirect(url_for('profile', username=user.username))
             else:
-                flash("Error", "Passeord or email is incorrect")
+                flash("Error", "Password or email is incorrect")
     return render_template('signin.html', form=form) 
+
+@app.route('/profile/<username>', methods=['GET'])
+@login_required
+def profile(user=None):
+    if username != None and request.method == 'GET':
+        user = models.User.select().where(models.User.username==username).get()
+        resources = models.Resources.select().where(models.Resources.user == user.id).order_by(-models.Recipe.timestamp)
+
+        # Owner = user.alias()
+        Saved_resources = models.SavedResources.select(models.SavedResources, models.Resources.title, models.Resources.id, models.User.username, #Owner.username)
+        # .join(Owner)
+        # .switch(models.SavedResources)
+        # .join(models.Resources)
+        # .join(models.User)
+
+        return render_template('profile.html', user=user, resources=resources, saved_resources=saved_resources) 
+    return redirect(url_for('index')) 
+
+
+
+
 
 @app.route('/signout')
 @login_required
