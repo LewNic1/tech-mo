@@ -36,6 +36,7 @@
           <!-- If user is not logged in, show Signin/Signup button -->
             <div class="navbar-item">
               <div class="buttons">
+              <a href="{{ url_for('index') }}" class="button is-light nav-links" title="index">HOME</a> 
               <a href="{{ url_for('about') }}" class="button is-light nav-links" title="about">ABOUT</a>  
               <a href="{{ url_for('signin') }}" class="button is-light nav-links" title="signin">SIGN IN</a>
               <a href="{{ url_for('signup') }}" class="button is-light nav-links" title="signup">SIGN UP</a> 

@@ -100,14 +100,43 @@ def profile(user=None):
         resources = models.Resources.select().where(models.Resources.user == user.id).order_by(-models.Recipe.timestamp)
 
         # Owner = user.alias()
-        Saved_resources = models.SavedResources.select(models.SavedResources, models.Resources.title, models.Resources.id, models.User.username, #Owner.username)
+        Saved_resources = models.SavedResources.select(models.SavedResources, models.Resources.title, models.Resources.id, models.User.username) #Owner.username)
         # .join(Owner)
         # .switch(models.SavedResources)
         # .join(models.Resources)
         # .join(models.User)
 
         return render_template('profile.html', user=user, resources=resources, saved_resources=saved_resources) 
+   
     return redirect(url_for('index')) 
+
+@app.route('/edit-profile', methods=['GET', 'POST'])
+@login_required
+def edit_profile():
+    user = models.User.get(current_user.id)
+    form = forms.EditUserForm()
+    if form.validate_on_submit():
+        user.username = form.username.data
+        user.email = form.email.data
+        user.location = form.location.data
+        user.save()
+        flash('Success! Changes saved.')
+
+        return redirect(url_for('profile', username=user.username))
+    return render_template('edit-profile.html', form=form, user=user)
+
+# @app.route('/resources', methods=['GET','PUT'])
+# @app.route('/resources/,resource_id>', methods=['GET', 'PUT'])
+# @login_required
+# # def resources(resource_id=None):
+# #     if resource_id !=None and request.method =='GET':
+# #         resource = models.Resource.select().where(models.Resource.id == resource_id).get()
+# #         return render_template('resource.html', resource=resource)
+# #     resources = models.Resource.select().limit(10)
+# #     return render_template('resources.html', resources=resources) 
+
+
+
 
 
 
