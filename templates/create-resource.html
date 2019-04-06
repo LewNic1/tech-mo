@@ -11,8 +11,8 @@
         <!-- <img src="{{ url_for('static', filename='rice.jpeg') }}"> -->
       </div>
       <div class="column">
-  <h2 class="subtitle is-2">Add Recipe</h2>
-  <form method="POST" action="{{ url_for('add_recipe') }}" class="field" enctype="multipart/form-data">
+  <h2 class="subtitle is-2">Add Resource</h2>
+  <form method="POST" action="{{ url_for('create-resource') }}" class="field" enctype="multipart/form-data">
     {{ form.hidden_tag() }}
     
     {% for field in form if field.widget.input_type != 'hidden' %}
@@ -20,7 +20,7 @@
     {% endfor %}
 
     <div class="has-text-centered">
-    <button type="submit" class="button is-danger">Add Recipe</button><a href="{{ url_for('profile', username=user.username) }}" class="button is-light">Cancel</a>
+    <button type="submit" class="button is-danger">Add Resource</button><a href="{{ url_for('profile', username=user.username) }}" class="button is-light">Cancel</a>
   </form>
 </div>
   </div>

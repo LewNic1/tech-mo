@@ -18,8 +18,8 @@
   <body class="has-navbar-fixed-top">
     <nav class="navbar is-light is-fixed-top" role="navigation" aria-label="main navigation">
       <div class="navbar-brand ">
-        <!-- Logo -->
-        <a href="{{ url_for('index') }}" class="navbar-item center"><img src="{{ url_for('static', filename='rolling-pin.png') }}"></a>
+        <!-- Logo
+        <a href="{{ url_for('index') }}" class="navbar-item center"><img src="{{ url_for('static', filename='rolling-pin.png') }}"></a> -->
         <!-- Hamburger bar for responsive nav -->
         <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
           <span aria-hidden="true"></span>
@@ -33,7 +33,7 @@
           
 
           {% if current_user.is_anonymous %}
-          <!-- If user is not logged in, show Signin/Signup button -->
+          <!-- User not logged in, show Signin/Signup -->
             <div class="navbar-item">
               <div class="buttons">
               <a href="{{ url_for('index') }}" class="button is-light nav-links" title="index">HOME</a> 
@@ -46,12 +46,13 @@
             </div>
           
           {% else %}
-          <!-- If user is logged in, show other pages -->
-            <a href="{{ url_for ('resources') }}" class="navbar-item">RESOURCES</a>
-
+          <!-- User logged in, show other pages -->
+           
+            <a href="{{ url_for('index') }}" class="navbar-item nav-links">HOME</a> 
             <a href="{{ url_for('profile', username=current_user.username) }}" class="navbar-item nav-links">PROFILE</a>
+            <a href="{{ url_for('resources') }}" class="navbar-item nav-links">Resources</a>
 
-            <a href="{{ url_for('logout') }}" class="navbar-item nav-links">LOGOUT</a>
+            <a href="{{ url_for('signout') }}" class="navbar-item nav-links">SIGN OUT</a> 
           
           {% endif %}
         </div>
@@ -67,11 +68,11 @@
     <footer class="footer">
       <div class="content ">
         <p class="has-text-right">&copy; TechMo 2019. 
-        Made with &#x2661; by Nicolette Lewis</p>
+        <!-- Made with &#x2661; by Nicolette Lewis</p> -->
       </div>
     </footer>
 
-    <!-- Vendor Scripts -->
+    <!-- Vendor Scripts
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.9"></script>
     <script>
       var typed = new Typed('#typed', {
@@ -87,4 +88,4 @@
     <script src="{{ url_for('static', filename='app.js') }}"></script>
   </body>
 
-</html>
+</html> -->

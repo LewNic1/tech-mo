@@ -2,18 +2,19 @@ import datetime
 from peewee import *
 # import os 
 # from flask import jsonify 
+from wtforms import SelectField
 from flask_login import UserMixin
-from flask_bcrypt import generate_password_hash
+from flask_bcrypt import generate_password_hash 
 
 DATABASE = SqliteDatabase('mom.db') #sets db variable for development
 
 class User(UserMixin, Model):
+    
     username = CharField(unique=True)
     email = CharField(unique=True)
     password = CharField(max_length=100)
-    location = TextField()
-    image_filename = CharField() 
-    image_url = CharField() 
+    location = CharField()
+    
     
     class Meta:
         database = DATABASE
@@ -21,16 +22,13 @@ class User(UserMixin, Model):
 
      #signup (POST)   
     @classmethod
-    def create_user(cls, username, email, password, location, image_filename, image_url):
+    def create_user(cls, username, email, password, location):
         try:
             cls.create(
                 username = username,
                 email = email,
                 password = generate_password_hash(password),
-                location = location,
-                image_filename = image_filename,
-                image_url = image_url
-            ) 
+                location = location)
                 
         except IntegrityError:
             raise ValueError("User already exists")
@@ -42,8 +40,8 @@ class User(UserMixin, Model):
                 username = username,
                 email = email,
                 password = generate_password_hash(password),
-                location = location 
-            )
+                location = location) 
+           
         except IntegrityError:
             raise ValueError("edit error")
             
@@ -60,15 +58,14 @@ class Resources(Model):
         order_by = ['-timestamp']
 
 @classmethod
-def create_resource(cls, category, title, content, timestamp, userId): #??Add ID???
+def create_resource(cls, category, title, content, timestamp): 
     try:
         cls.create(
             category = category,
             title = title,
             content = content,
             timestamp = timestamp,
-            user = user
-        )
+            user = user)
     
     except IntegrityError:
         raise ValueError("create resource error")   

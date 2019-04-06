@@ -1,10 +1,42 @@
 {% macro render_field(field) %}
-    <div class="field">
-        {% if field.errors %}
-            {% for error in field.errors %}
-                <div class="notification error">{{ error }}</div>
-            {% endfor %}
-        {% endif %}
-        {{ field(placeholder=field.lable.text) }}
-    </div>
+  <div class="form-input">
+    {% if field.errors %}
+      {% for error in field.errors %}
+        <div>
+          {{ error }}
+        </div>
+      {% endfor %}
+    {% endif %}
+  
+    {{ field.label(class="label") }}
+    {{ field(class="control", placeholder=field.label.text, cols="35", rows="20") }}
+  </div>
 {% endmacro %}
+
+<!-- Defining a macro called field_error() that accepts a form field as a parameter to display any errors from data validators -->
+{% macro field_error(field) %}
+  {% if field.errors %}
+    {% for error in field.errors %}
+      <div>
+        {{ error }}
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endmacro %}
+
+<!-- Defining a macro called file_upload in order to upload images -->
+{% macro field_upload(field) %}
+  <div class="form-input" type="file" name="photo">
+    {% if field.errors %}
+      {% for error in field.errors %}
+        <div>
+          {{ error }}
+        </div>
+      {% endfor %}
+    {% endif %}
+    
+    {{ field.label(class="label") }}
+    {{ field(class="control", placeholder=field.label.text, cols="35", rows="20") }}
+  </div>
+{% endmacro %}
+
