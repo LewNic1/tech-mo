@@ -16,7 +16,7 @@
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
-                    {{% else %}}
+                    {% else %}
                         {{ form.email(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
@@ -30,7 +30,7 @@
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
-                    {{% else %}}
+                    {% else %}
                         {{ form.password(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
@@ -42,11 +42,14 @@
             <div class="form-group">
                 {{ form.submit(class="btn btn-outline-info") }}
             </div>
+            <small class="text-muted ml-2">
+                <a href="#">Forgot Password?</a>
+            </small>
         </form>
     </div>
     <div class="border-top pt-3">
         <small class="text-muted">
-            Already Have An Account? <a class="ml-2" href="{{ url_for('signin') }}">Sign In</a>
+            Need An Account? <a class="ml-2" href="{{ url_for('signup') }}">Sign Up</a>
         </small>
     </div>
 {% endblock content %} 

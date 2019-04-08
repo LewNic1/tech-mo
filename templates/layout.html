@@ -1,91 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>TechMo | TechMoms | TechMore</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <!-- Bulma CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.css">
-    <!-- Animations-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
 
-    <!-- Our CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-  </head>
-  <body class="has-navbar-fixed-top">
-    <nav class="navbar is-light is-fixed-top" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand ">
-        <!-- Logo
-        <a href="{{ url_for('index') }}" class="navbar-item center"><img src="{{ url_for('static', filename='rolling-pin.png') }}"></a> -->
-        <!-- Hamburger bar for responsive nav -->
-        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
-      </div>
-
-      <div id="navbarBasicExample" class="navbar-menu">
-        <div class="navbar-end">
-          
-
-          {% if current_user.is_anonymous %}
-          <!-- User not logged in, show Signin/Signup -->
-            <div class="navbar-item">
-              <div class="buttons">
-              <a href="{{ url_for('index') }}" class="button is-light nav-links" title="index">HOME</a> 
-              <a href="{{ url_for('about') }}" class="button is-light nav-links" title="about">ABOUT</a>  
-              <a href="{{ url_for('signin') }}" class="button is-light nav-links" title="signin">SIGN IN</a>
-              <a href="{{ url_for('signup') }}" class="button is-light nav-links" title="signup">SIGN UP</a> 
-
-                
-              </div>
+    {% if title %}
+        <title>TechMo - {{ title }}</title>
+    {% else %}
+        <title>TechMo</title>
+    {% endif %}
+</head>
+<body>
+    <header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+        <div class="container">
+          <a class="navbar-brand mr-4" href="/">Techmo</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+              <a class="nav-item nav-link" href="{{ url_for('landing') }}">Home</a>
+              <a class="nav-item nav-link" href="{{ url_for('about') }}">About</a>
             </div>
-          
-          {% else %}
-          <!-- User logged in, show other pages -->
-           
-            <a href="{{ url_for('index') }}" class="navbar-item nav-links">HOME</a> 
-            <a href="{{ url_for('profile', username=current_user.username) }}" class="navbar-item nav-links">PROFILE</a>
-            <a href="{{ url_for('resources') }}" class="navbar-item nav-links">Resources</a>
-
-            <a href="{{ url_for('signout') }}" class="navbar-item nav-links">SIGN OUT</a> 
-          
-          {% endif %}
+            <!-- Navbar Right Side -->
+            <div class="navbar-nav">
+              <a class="nav-item nav-link" href="{{ url_for('signin') }}">Sign in</a>
+              <a class="nav-item nav-link" href="{{ url_for('signup') }}">Sign up</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main role="main" class="container">
+      <div class="row">
+        <div class="col-md-8">
+          {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                  {{ messages }}
+                </div>
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+          {% block content %}{% endblock %}
+        </div>
+        <div class="col-md-4">
+          <div class="content-section">
+            <h3>Our Sidebar</h3>
+            <p class='text-muted'>You can put any information here you'd like.
+              <ul class="list-group">
+                <li class="list-group-item list-group-item-light">Latest Posts</li>
+                <li class="list-group-item list-group-item-light">Announcements</li>
+                <li class="list-group-item list-group-item-light">Calendars</li>
+                <li class="list-group-item list-group-item-light">etc</li>
+              </ul>
+            </p>
+          </div>
         </div>
       </div>
-    </nav>
+    </main>
 
-    <section class="content">
-      {% block content %}
 
-      {% endblock %}
-    </section>
-
-    <footer class="footer">
-      <div class="content ">
-        <p class="has-text-right">&copy; TechMo 2019. 
-        <!-- Made with &#x2661; by Nicolette Lewis</p> -->
-      </div>
-    </footer>
-
-    <!-- Vendor Scripts
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.9"></script>
-    <script>
-      var typed = new Typed('#typed', {
-        stringsElement: '#typed-strings',
-        typeSpeed: 70,
-        backSpeed: 40,
-        smartBackspace: true,
-        loop: true,
-        loopCount: Infinity,
-      });
-    </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-    <script src="{{ url_for('static', filename='app.js') }}"></script>
-  </body>
-
-</html> -->
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

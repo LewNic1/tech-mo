@@ -1,10 +1,10 @@
 import datetime
 from peewee import *
-# import os 
-# from flask import jsonify 
-from wtforms import SelectField
+
 from flask_login import UserMixin
 from flask_bcrypt import generate_password_hash 
+# import os 
+# from wtforms import SelectField
 
 DATABASE = SqliteDatabase('mom.db') #sets db variable for development
 
@@ -12,7 +12,7 @@ class User(UserMixin, Model):
     
     username = CharField(unique=True)
     email = CharField(unique=True)
-    password = CharField(max_length=100)
+    password = CharField(max_length=50)
     location = CharField()
     
     
