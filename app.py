@@ -117,36 +117,44 @@ def edit_profile():
     return render_template('edit-profile.html', form=form, user=current_user)
     
 
-@app.route('/resource', methods=['GET'])
-@app.route('/resource/<resource_id>', methods=['GET', 'PUT']) 
+@app.route('/resource', methods=['GET', 'POST'])
 @login_required
-def resource(resource_id=None):
-    if resource_id !=None and request.method =='GET':
-        resource = models.Resource.select().where(models.Resource.id == resource_id).get()
-        return render_template('resource.html', resource=resource)
+def resource():
     resources = models.Resources.select().limit(10)
-    return render_template('resources.html', resources=resources)
 
-
-
-@app.route('/create-resource', methods=['GET', 'POST'])
-@login_required
-def add_resource():
     form = forms.ResourceForm()
-    user = g.user._get_current_object()
-
     if form.validate_on_submit():
-        models.Resource.create(
+        models.Resources.create(
+            user = g.user._get_current_object(),
             category = form.category.data,
             title = form.title.data,
-            content = form.content.data,
-            user = g.user._get_current_object())
-    
-        resource = models.Resource.get(models.Resource.title == form.title.data) 
+            content = form.content.data
+            )
         flash('Resource created!', 'Success!')
-        return redirect(url_for ('resource', resource_id=resource.id))   
-    else:
-        return render_template('create-resource.html', form=form, user=user) 
+
+        return redirect(url_for ('resource'))
+
+    return render_template('resources.html', form=form, resources=resources)
+
+
+
+
+
+
+
+
+
+
+# @app.route('/create-resource', methods=['GET', 'POST'])
+# @login_required
+# def add_resource():
+#     form = forms.ResourceForm()
+#     user = g.user._get_current_object()
+#     resource = models.Resource.get(models.Resource.title == form.title.data)
+
+    
+#     else:
+#         return render_template('create-resource.html', form=form, user=user) 
 
  
 @app.route('/edit-resource/<resource_id>', methods=['GET', 'POST', 'PUT']) 
@@ -200,4 +208,26 @@ def signout():
 
 if __name__ == '__main__':
     models.initialize()
+    try:
+        models.User.create_user(
+           username = 'Nicolette',
+           email = 'Nic@mail.com', 
+           password = 'password',
+           location = 'Oakland'
+        )
+
+
+        models.Resources.create_resource(
+            user = 1,
+            category = 'technical',
+            title = 'Flask study group',
+            content = 'Monday 6pm at GA'
+        )
+    
+    
+    
+    except ValueError:
+        pass 
+
+
     app.run(debug=DEBUG, port=PORT)   

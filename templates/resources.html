@@ -1,3 +1,17 @@
-{% if resources.count() == 0 %}
-    True
-{% endif %}
+{% extends 'layout.html' %}
+{% block content %}
+resources page
+<form method='POST'>
+{{ form.hidden_tag() }}
+<div>{{ form.category.label }}</div>
+<div>{{ form.category() }}</div>
+<div>{{ form.title.label }}</div>
+<div>{{ form.title()}}</div>
+<div>{{ form.content.label }}</div>
+<div>{{ form.content() }}</div>
+<div>{{ form.submit }}</div> 
+</form>
+
+
+   
+{% endblock %}

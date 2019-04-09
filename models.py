@@ -18,7 +18,8 @@ class User(UserMixin, Model):
     
     class Meta:
         database = DATABASE
-        db_table = 'user' 
+        order_by = ('-username',)
+         
 
      #signup (POST)   
     @classmethod
@@ -46,39 +47,38 @@ class User(UserMixin, Model):
             raise ValueError("edit error")
             
 class Resources(Model):
+    user = ForeignKeyField(
+        model = User,
+        backref='resources'        
+    )
     category = CharField()
     title = CharField()
-    content = TextField()
+    content = CharField()
     timestamp = DateTimeField(default=datetime.datetime.now())
-    user = ForeignKeyField(User, backref="resources")
     
     class Meta:
         database = DATABASE
-        db_table = 'resources'
-        order_by = ['-timestamp']
+        order_by = ('-timestamp')
 
-@classmethod
-def create_resource(cls, category, title, content, timestamp): 
-    try:
-        cls.create(
-            category = category,
-            title = title,
-            content = content,
-            timestamp = timestamp,
-            user = user)
+    @classmethod
+    def create_resource(cls,user, category, title, content):  
+        try:
+            cls.create(
+                user = user,
+                category = category,
+                title = title,
+                content = content
+            )
     
-    except IntegrityError:
-        raise ValueError("create resource error")   
+        except IntegrityError:
+            raise ValueError("create resource error")   
 
 class SavedResources(Model):
-    user = ForeignKeyField(User)
-    resource = ForeignKeyField(Resources) 
     timestamp = DateTimeField(default=datetime.datetime.now())
 
     class Meta:
         database = DATABASE
-        db_table =  'savedResources'
-        order_by = ['-timestamp']
+        order_by = ('-timestamp')
 
 
 
