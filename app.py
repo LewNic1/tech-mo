@@ -27,11 +27,10 @@ login_manager.login_view = 'signin'
 @login_manager.user_loader
 def load_user(userid):
     try:
+        # user = models.User.get(models.User.id == userid)
         return models.User.get(models.User.id == userid)
     except models.DoesNotExist:
         return None
-
-
 
 
 @app.before_request
@@ -44,6 +43,7 @@ def before_request():
 def after_request(response):   #CLOSES THE DB AFTER EACH REQUEST
     g.db.close()
     return response 
+
 
 @app.route('/')
 @app.route('/landing')
@@ -64,7 +64,7 @@ def signup():
             username=form.username.data,
             email=form.email.data,
             password=form.password.data,
-            location='San Francisco'
+            location=form.location.data
             )
         return redirect(url_for('profile'))
     return render_template('signup.html', title='Sign Up', form=form) 
@@ -87,9 +87,22 @@ def signin():
                 flash('Error, Password or email is incorrect', 'danger')
     return render_template('signin.html', form=form) 
 
-@app.route('/profile', methods=['GET', 'POST', 'PUT'])
+@app.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
+   
+    return render_template('profile.html', user=g.user._get_current_object())
+    
+    
+    
+    
+    
+    
+    
+
+@app.route('/edit-profile', methods=['GET', 'POST', 'PUT']) 
+@login_required
+def edit_profile(): 
     form = forms.EditUserForm()
     
     if form.validate_on_submit():
@@ -100,58 +113,87 @@ def profile():
         mdetails.save()
         user = models.User.select().where(models.User.username==form.username.data).get()
 
-        return render_template('edit-profile.html', form=form, user=user)
+        return render_template('profile.html', user=user)
     return render_template('edit-profile.html', form=form, user=current_user)
-    # user = models.User.select().where(models.User.username==username).get()
-    # resources = models.Resources.select().where(models.Resources.user == user.id).order_by(-models.Resources.timestamp)
-
-        # Owner = user.alias()
-        # Saved_resources = models.SavedResources.select(models.SavedResources, models.Resources.title, models.Resources.id, models.User.username) #Owner.username)
-        # .join(Owner)
-        # .switch(models.SavedResources)
-        # .join(models.Resources)
-        # .join(models.User)
-
     
-    # return redirect(url_for('landing')) 
 
-# #==============
-# # Create Resource route
-# # =============
-# @app.route('/create-resource', methods=['GET', 'POST'])
-# @login_required
-# def add_resource():
-#     form = forms.ResourceForm()
-#     user = g.user._get_current_object()
+@app.route('/resource', methods=['GET'])
+@app.route('/resource/<resource_id>', methods=['GET', 'PUT']) 
+@login_required
+def resource(resource_id=None):
+    if resource_id !=None and request.method =='GET':
+        resource = models.Resource.select().where(models.Resource.id == resource_id).get()
+        return render_template('resource.html', resource=resource)
+    resources = models.Resources.select().limit(10)
+    return render_template('resources.html', resources=resources)
 
-#     models.Resource.create(
-#         category = form.category.data,
-#         title = form.title.data,
-#         content = form.content.data
-#         user = g.user._get_current_object()
-#         resource = models.Resource.get(models.Resource.title == form.title.data) 
-#     flash('Success!' 'Resource created!')
-#     return redirect(url_for ('resource', resource_id=resource.id))   
-# else:
-#     retuen render_template('create-resource.html', form=form, user=user) 
+
+
+@app.route('/create-resource', methods=['GET', 'POST'])
+@login_required
+def add_resource():
+    form = forms.ResourceForm()
+    user = g.user._get_current_object()
+
+    if form.validate_on_submit():
+        models.Resource.create(
+            category = form.category.data,
+            title = form.title.data,
+            content = form.content.data,
+            user = g.user._get_current_object())
+    
+        resource = models.Resource.get(models.Resource.title == form.title.data) 
+        flash('Resource created!', 'Success!')
+        return redirect(url_for ('resource', resource_id=resource.id))   
+    else:
+        return render_template('create-resource.html', form=form, user=user) 
 
  
-# @app.route('/resources', methods=['GET','PUT'])
-# @app.route('/resources/,resource_id>', methods=['GET', 'PUT'])
-# @login_required
-# def resources(resource_id=None):
-#     if resource_id !=None and request.method =='GET':
-#         resource = models.Resource.select().where(models.Resource.id == resource_id).get()
-#         return render_template('resource.html', resource=resource)
-#     resources = models.Resource.select().limit(10)
-#     return render_template('resources.html', resources=resources) 
+@app.route('/edit-resource/<resource_id>', methods=['GET', 'POST', 'PUT']) 
+@login_required
+def edit_resource():
+    form = forms.EditResourceForm()
+    
+    if form.validate_on_submit():
+        mdetails = models.User.select().where(models.User.username==current_user.username).get()
+        mdetails.category = form.category.data
+        mdetails.title = form.title.data
+        mdetails.content = form.content.data
+        mdetails.save()
+        user = models.User.select().where(models.User.username==form.username.data).get()
 
+        return render_template('edit-resource.html', form=form, user=user)
+    return render_template('resource.html', form=form, user=current_user)
+
+@app.route('/save/<resource_id>')
+@login_required
+def save_to_profile(resource_id=None):
+    if resource_id != None:
+        user = g.user._get_current_object()
+        resource = models.Resource.get(models.Resource.id == resource_id) 
+
+        models.SavedResources.create(user=user.id, resource=resource.id)
+        return redirect(url_for('profile', username=user.username))
+    return redirect(url_for('resource'))
+
+@app.route('/delete-resource/<resource_id>', methods=['GET','DELETE'])
+@login_required
+def delete_resource(resource_id=None):
+    if resource_id != None:
+        deleted_saved_resource = models.SavedResources.delete().where(models.SavedResources.resource == resource_id)
+        deleted_saved_resource.excute()
+
+        deleted_resource = models.Resource.delete().where(models.Resource.id == resource_id)
+        deleted_resource.excute()
+
+        return redirect(url_for('resource'))
+    return redirect(url_for('resource', resource_id))
 
 
 @app.route('/signout')
-# @login_required
+@login_required
 def signout():
-    # signout_user()
+    logout_user()
     flash("Sign out success!")
     return redirect(url_for('landing'))
 

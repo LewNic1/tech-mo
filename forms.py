@@ -8,7 +8,7 @@ class SignUpForm(Form):
     email = StringField('Email', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')]) 
-    # location = StringField('Location', validators=[DataRequired()])
+    location = StringField('Location', validators=[DataRequired()])
     submit = SubmitField('Sign Up')
 
 class SignInForm(Form): 
@@ -22,6 +22,7 @@ class EditUserForm(Form):
     email = StringField('Email', validators=[DataRequired()])
     location = StringField('Location', validators=[DataRequired()])
     submit = SubmitField('Done')
+    cancel = SubmitField('Cancel')
 
 class ResourceForm(Form):
     category = SelectField('Category', choices=[('technical','Technical'), ('non-technical', 'Non-Technical')], validators=[DataRequired()])
@@ -29,7 +30,7 @@ class ResourceForm(Form):
     content = TextAreaField('Content', validators=[DataRequired()])
     submit = SubmitField('Submit')   
 
-class EditResourcesForm(Form):
+class EditResourceForm(Form):
     category = SelectField('Category', choices=[('technical', 'Technical'), ('non-technical', 'Non-Technical')], validators=[DataRequired()])
     title = StringField('Title', validators=[DataRequired()])
     content = TextAreaField('Content', validators=[DataRequired()])  
