@@ -5,11 +5,7 @@
 
 {% block content %}
 <div class="container">
-  <div class="columns">
-    <div class="column">
-        <img src="{{ url_for('static', filename='beef.jpeg') }}">
-        <!-- <img src="{{ url_for('static', filename='rice.jpeg') }}"> -->
-      </div>
+  
       <div class="column">
   <h2 class="subtitle is-2">Add Resource</h2>
   <form method="POST" action="{{ url_for('create-resource') }}" class="field" enctype="multipart/form-data">

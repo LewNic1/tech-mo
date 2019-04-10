@@ -1,6 +1,6 @@
 <!-- Defining a macro called render_field() that accepts a form field as an argument -->
 
-{% macro render_field(field) %}
+<!-- {% macro render_field(field) %}
   <div class="form-input">
     {% if field.errors %}
       {% for error in field.errors %}
@@ -13,10 +13,10 @@
     {{ field.label(class="label") }}
     {{ field(class="control", placeholder=field.label.text, cols="35", rows="20") }}
   </div>
-{% endmacro %}
+{% endmacro %} -->
 
 <!-- Defining a macro called field_error() that accepts a form field as a parameter to display any errors from data validators -->
-{% macro field_error(field) %}
+<!-- {% macro field_error(field) %}
   {% if field.errors %}
     {% for error in field.errors %}
       <div>
@@ -24,7 +24,7 @@
       </div>
     {% endfor %}
   {% endif %}
-{% endmacro %}
+{% endmacro %} -->
 
 
 

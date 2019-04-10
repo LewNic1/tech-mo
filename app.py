@@ -90,12 +90,16 @@ def signin():
 @app.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
+    user = g.user._get_current_object()
+    savedresources = models.SavedResources.select(models.SavedResources, models.Resources).join(models.Resources).where(models.SavedResources.user==user.id, models.SavedResources==models.Resources.id)
     # resources = models.SavedResources.select(models.Resources.id, models.Resources.category, models.Resources.title, models.Resources.content).join(models.Resources).where(models.SavedResources.user==current_user.id, models.SavedResources.resource==models.Resources.id)
-    resources = models.Resources.select().where(models.Resources.id==1)
-    /print(resources)
-    for res in resources:
-        print(res)
-    return render_template('profile.html', user=g.user._get_current_object(), resources=resources)
+    # resources = models.Resources.select().where(models.Resources.id==1)
+    # /print(resources)
+    # for res in resources:
+    #     print(res)
+    # return render_template('profile.html', user=g.user._get_current_object(), resources=resources)
+    return render_template('profile.html', user=g.user._get_current_object(), savedresources=savedresources)
+    return(url_for('landing'))
     
     
     
@@ -180,17 +184,25 @@ def edit_resource():
 @app.route('/save/<resource_id>')
 @login_required
 def save_to_profile(resource_id=None):
+    user = g.user._get_current_object()
     if resource_id != None:
-        user = g.user._get_current_object()
-        resource = models.Resources.get(models.Resources.id == resource_id) 
-        user_resource = models.SavedResources.get(models.SavedResources.user==user.id, models.SavedResources.resource==resource.id)
+        resource = models.Resources.get(models.Resources.id == resource_id)
+        models.SavedResources.create(
+            user=user.id,
+            resource=resource_id)
         
-        if user_resource == None:
-            models.SavedResources.save_resource(user.id, resource.id)
+        return redirect(url_for('profile', user=g.user._get_current_object()))
+    # if resource_id != None:
+    #     user = g.user._get_current_object()
+    #     resource = models.Resources.get(models.Resources.id == resource_id) 
+    #     user_resource = models.SavedResources.get(models.SavedResources.user==user.id, models.SavedResources.resource==resource.id)
+        
+    #     if user_resource == None:
+    #         models.SavedResources.save_resource(user.id, resource.id)
 
-        resources = models.SavedResources.select(models.Resources.id, models.Resources.category, models.Resources.title).join(models.Resources).where(models.SavedResources.user==user.id, models.SavedResources.resource==models.Resources.id)
+    #     resources = models.SavedResources.select(models.Resources.id, models.Resources.category, models.Resources.title).join(models.Resources).where(models.SavedResources.user==user.id, models.SavedResources.resource==models.Resources.id)
        
-        return render_template('profile.html', user=g.user._get_current_object(), resources=resources)
+        # return render_template('profile.html', user=g.user._get_current_object(), resources=resources)
     return redirect(url_for('resource'))
 
 @app.route('/delete-resource/<resource_id>', methods=['GET','DELETE'])
