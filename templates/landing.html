@@ -2,38 +2,26 @@
 
 {% block content %}
 <div class="hero is-fullheight-with-navbar">
-  <div class="hero-body">
-    <div class="container land">
-      <div>
-      <img class="animated fadeIn" src="{{ url_for('static', filename='head1.jpeg') }}">
-      <p class="TechMo-title animated fadeIn has-text-centered">TechMo</p>
-      <div class="overlay has-text-centered">
-        <div id="typed-strings">
-            <!-- <p><strong>TechMo</strong></p> -->
-            <p><strong>TechMoms</strong></p>
-            <p>TechMore</p>
-           
+    <div class="hero-body">
+      <div class="container land">                    
+        <div>
+        <img class="animated fadeIn" src="{{ url_for('static', filename='static/cowomen-1450082-unsplash.jpg') }}">
+        <p class="techmo-title animated fadeIn has-text-centered">TechMo</p>
+        <div class="overlay has-text-centered">
+          <div id="typed-strings">
+              <p><strong>TechMo</strong></p>
+              <p><strong>TechMoms</strong></p>
+              <p><strong>TechMore</strong></p> 
+          </div>
+          <span id="typed"></span>
         </div>
-        <span id="typed"></span>
       </div>
     </div>
   </div>
-</div>
-<div>
-  <div class="container section-one">
-    <div class="columns">
-      <div class="column">
-        <img class="animated slideInLeft" src="{{ url_for('static', filename='coffee.jpeg') }}">
-      </div>
-      <div class="column">
-        <img class="animated slideInRight" src="{{ url_for('static', filename='eggs.jpeg') }}">
-    </div>
-  </div>
-</div>
 <div class="container section-one ">
   <div class="about Level-item has-text-centered">
-    <h2 class="subtitle is-2 animated fade-in">Welcome to TechMo</h2>
-      <p>TechMo was created by a mom who...</p>
+    <h4 class="subtitle is-2 animated fade-in">Welcome to TechMo</h4>
+      <p>TechMo- created by a mom for moms who are in Tech Bootcamps or seasoned Techies to join forces...</p>
       <a class="button" href="{{ url_for ('about') }}">Meet...</a>
     </div>
 </div>

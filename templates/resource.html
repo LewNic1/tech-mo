@@ -1,12 +1,13 @@
 {% extends 'layout.html' %}
+<!-- To save resource to profile -->
 
 {% block content %}
 
 	<div class="columns resource-show">
-		<h1>Resource Page</h1>
-		<div class="column left-side has-text-centered">
+		<h1>Resourcs</h1>
+		<div class="column right-side has-text-centered">
 					<h1 class="is-4 has-text-danger">{{ resource.title }}</h1>
-					<p class="is-size-6"> Created By {{ resource.user.username }}</p>
+					<p class="is-size-6"> Submitted By {{ resource.user.username }}</p>
 					<p class="is-size-6"> Date: {{ resource.timestamp }}</p>
 					<a href="{{ url_for('save_to_favorite', resource_id=resource.id) }}" class="button is-small is-dark">Save Resource</a>
 					{% if current_user.id == resource.user.id %}

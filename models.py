@@ -74,11 +74,23 @@ class Resources(Model):
             raise ValueError("create resource error")   
 
 class SavedResources(Model):
+    user = ForeignKeyField(User) 
+    resource = ForeignKeyField(Resources)
     timestamp = DateTimeField(default=datetime.datetime.now())
 
     class Meta:
         database = DATABASE
         order_by = ('-timestamp')
+
+    @classmethod
+    def save_resource(cls, user, resource):  
+        try:
+            cls.create(
+                user = user,
+                resource = resource
+            )
+        except IntegrityError:
+            raise
 
 
 

@@ -81,17 +81,21 @@ def signin():
         else:
             if check_password_hash(user.password, form.password.data): 
                 login_user(user) #session created
-                flash('Sign in success!', 'success')
+                flash('Sign in success!', 'alert alert-success')
                 return redirect(url_for('profile'))
             else:
-                flash('Error, Password or email is incorrect', 'danger')
+                flash('Error, Password or email is incorrect', 'alert alert-danger')
     return render_template('signin.html', form=form) 
 
 @app.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
-   
-    return render_template('profile.html', user=g.user._get_current_object())
+    # resources = models.SavedResources.select(models.Resources.id, models.Resources.category, models.Resources.title, models.Resources.content).join(models.Resources).where(models.SavedResources.user==current_user.id, models.SavedResources.resource==models.Resources.id)
+    resources = models.Resources.select().where(models.Resources.id==1)
+    /print(resources)
+    for res in resources:
+        print(res)
+    return render_template('profile.html', user=g.user._get_current_object(), resources=resources)
     
     
     
@@ -178,10 +182,15 @@ def edit_resource():
 def save_to_profile(resource_id=None):
     if resource_id != None:
         user = g.user._get_current_object()
-        resource = models.Resource.get(models.Resource.id == resource_id) 
+        resource = models.Resources.get(models.Resources.id == resource_id) 
+        user_resource = models.SavedResources.get(models.SavedResources.user==user.id, models.SavedResources.resource==resource.id)
+        
+        if user_resource == None:
+            models.SavedResources.save_resource(user.id, resource.id)
 
-        models.SavedResources.create(user=user.id, resource=resource.id)
-        return redirect(url_for('profile', username=user.username))
+        resources = models.SavedResources.select(models.Resources.id, models.Resources.category, models.Resources.title).join(models.Resources).where(models.SavedResources.user==user.id, models.SavedResources.resource==models.Resources.id)
+       
+        return render_template('profile.html', user=g.user._get_current_object(), resources=resources)
     return redirect(url_for('resource'))
 
 @app.route('/delete-resource/<resource_id>', methods=['GET','DELETE'])
@@ -202,7 +211,7 @@ def delete_resource(resource_id=None):
 @login_required
 def signout():
     logout_user()
-    flash("Sign out success!")
+    flash('Sign out success!', 'alert alert-danger')
     return redirect(url_for('landing'))
 
 

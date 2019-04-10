@@ -1,17 +1,28 @@
 {% extends 'layout.html' %}
 {% block content %}
 resources page
-<form method='POST'>
-{{ form.hidden_tag() }}
-<div>{{ form.category.label }}</div>
-<div>{{ form.category() }}</div>
-<div>{{ form.title.label }}</div>
-<div>{{ form.title()}}</div>
-<div>{{ form.content.label }}</div>
-<div>{{ form.content() }}</div>
-<div>{{ form.submit }}</div> 
-</form>
+<div class ='d-flex flex-row justify-content-between'>
+    <form method='POST'>
+        {{ form.hidden_tag() }}
+        <div>{{ form.category.label }}</div>
+        <div>{{ form.category() }}</div>
+        <div>{{ form.title.label }}</div>
+        <div>{{ form.title()}}</div>
+        <div>{{ form.content.label }}</div>
+        <div>{{ form.content() }}</div>
+        <div>{{ form.submit }}</div> 
+    </form>
 
+    <div class = 'd-flex flex-row justify-content-between'>
+        {% for resource in resources %}
+            <div>{{ resource.category }}</div>
+            <div>{{ resource.title }}</div>
+            <div>{{ resource. content }}</div>
+            
+            <a href="{{ url_for('save_to_profile', resource_id=resource.id) }}">Save R</a>
+        {% endfor %}
+    </div>
+</div>
 
    
 {% endblock %}

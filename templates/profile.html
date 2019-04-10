@@ -16,6 +16,16 @@
 				{% endif %}
 			{% endwith %} -->
 		</div>
+
+		<div class = 'd-flex flex-row justify-content-between'>
+			<p>Resources</p>
+			{% for resource in resources %}
+			<p>1</p>
+				<div>{{ resource.category }}</div>
+				<div>{{ resource.title }}</div>
+				<div>{{ resource.content }}</div>
+			{% endfor %}
+		</div>
 	</div>
 </div>
  
