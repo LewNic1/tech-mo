@@ -4,8 +4,8 @@
 <div class="container profile-container">
 	<h1>Profile Page</h1>
 		<div class="column">
-			<p><span class="title has-text-danger is-bold">{{ user.username }}</span></p> 
-			<p><span class="location"><small>Location: {{ user.location }}</small></span></p>
+			<p><span class="title has-text-danger is-bold"><medium>User: {{ user.username }}</medium></span></p> 
+			<p><span class="location"><medium>Location: {{ user.location }}</medium></span></p>
 			<a href="{{ url_for('edit_profile', username=current_user.username) }}" class="button is-dark">Edit Profile</a>
 
 			<!-- {% with messages = get_flashed_messages(with_categories=True) %}
