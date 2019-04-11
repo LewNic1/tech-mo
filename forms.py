@@ -33,4 +33,5 @@ class ResourceForm(Form):
 class EditResourceForm(Form):
     category = SelectField('Category', choices=[('technical', 'Technical'), ('non-technical', 'Non-Technical')], validators=[DataRequired()])
     title = StringField('Title', validators=[DataRequired()])
-    content = TextAreaField('Content', validators=[DataRequired()])  
+    content = TextAreaField('Content', validators=[DataRequired()]) 
+

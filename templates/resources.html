@@ -19,7 +19,8 @@ resources page
             <div>{{ resource.title }}</div>
             <div>{{ resource. content }}</div>
             
-            <a href="{{ url_for('save_to_profile', resource_id=resource.id) }}">Save R</a>
+            <a href="{{ url_for('save_to_profile', resource_id=resource.id) }}">Save</a>
+            <a href="/delete-resource/{{resource.id}}">DELETE</a> 
         {% endfor %}
     </div>
 </div>

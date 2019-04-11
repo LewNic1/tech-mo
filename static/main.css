@@ -78,4 +78,46 @@ body {
   .account-heading {
     font-size: 2.5rem;
   }
+  .typewriter p {
+    overflow: hidden; /* Ensures the content is not revealed until the animation */
+    border-right: .15em solid orange; /* The typwriter cursor */
+    white-space: nowrap; /* Keeps the content on a single line */
+    margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+    letter-spacing: 1em; /* Adjust as needed */
+    animation: 
+      typing 10s steps(80, end),
+      blink-caret 2s step-end infinite;
+  }
   
+  /* The typing effect */
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+  
+  /* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: orange; }
+}
+.mainhero {
+  background-image: url("../static/women.jpg");
+  background-repeat: no-repeat;
+  background-size: stretch;
+  
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  height:500px;
+  width:100%;
+ 
+   
+  
+}
+  
+ 
+    /* background: url(static/cowomen-1450082-unsplash.jpg);  */
+    
+   
+  
+ 
