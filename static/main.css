@@ -80,7 +80,7 @@ body {
   }
   .typewriter p {
     overflow: hidden; /* Ensures the content is not revealed until the animation */
-    border-right: .15em solid orange; /* The typwriter cursor */
+    border-right: .15em solid lightblue; /* The typwriter cursor */
     white-space: nowrap; /* Keeps the content on a single line */
     margin: 0 auto; /* Gives that scrolling effect as the typing happens */
     letter-spacing: 1em; /* Adjust as needed */
@@ -99,26 +99,21 @@ body {
   /* The typewriter cursor effect */
 @keyframes blink-caret {
   from, to { border-color: transparent }
-  50% { border-color: orange; }
+  50% { border-color: grey; }
 }
 .mainhero {
   background-image: url("../static/women.jpg");
   background-repeat: no-repeat;
   background-size: stretch;
-  
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   height:500px;
   width:100%;
- 
-   
+}
+
+.container {
+
+
   
 }
-  
- 
-    /* background: url(static/cowomen-1450082-unsplash.jpg);  */
-    
-   
-  
- 

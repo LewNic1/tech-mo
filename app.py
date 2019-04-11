@@ -81,7 +81,7 @@ def signin():
         else:
             if check_password_hash(user.password, form.password.data): 
                 login_user(user) #session created
-                flash('Sign in success!', 'alert alert-success')
+                flash('Sign in success!', 'success')
                 return redirect(url_for('profile'))
             else:
                 flash('Error, Password or email is incorrect', 'alert alert-danger')
