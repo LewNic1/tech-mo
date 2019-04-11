@@ -81,6 +81,7 @@ class SavedResources(Model):
     class Meta:
         database = DATABASE
         order_by = ('-timestamp')
+        # indexes = ((("user", "resource"), True),)
 
     @classmethod
     def save_resource(cls, user, resource):  

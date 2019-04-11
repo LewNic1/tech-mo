@@ -111,9 +111,18 @@ body {
   height:500px;
   width:100%;
 }
-
 .container {
+  text-align: center;
 
-
-  
 }
+
+
+
+
+ .footer {
+  background-color:  grey;
+  padding-bottom: 5px;
+  padding-top: 15px;
+  padding-right: 15px;
+  text-align: right;
+ }

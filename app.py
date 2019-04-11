@@ -91,7 +91,11 @@ def signin():
 @login_required
 def profile():
     user = g.user._get_current_object()
-    savedresources = models.SavedResources.select(models.SavedResources, models.Resources).join(models.Resources).where(models.SavedResources.user==user.id, models.SavedResources==models.Resources.id)
+    savedresources = models.SavedResources.select(models.Resources).join(models.Resources).where(models.SavedResources.user==user.id)
+    print(savedresources)
+    for s in savedresources:
+        print(s.resource.id)
+    return render_template('profile.html', user=g.user._get_current_object(), savedresources=savedresources)
     # resources = models.SavedResources.select(models.Resources.id, models.Resources.category, models.Resources.title, models.Resources.content).join(models.Resources).where(models.SavedResources.user==current_user.id, models.SavedResources.resource==models.Resources.id)
     # resources = models.Resources.select().where(models.Resources.id==1)
     # print(savedresources)
@@ -106,15 +110,7 @@ def profile():
     #     .join(models.Resources)  
     #     .join(models.User))
 
-    
-    
-    
-    
-    
-    
-    
-    return render_template('profile.html', user=g.user._get_current_object(), savedresources=savedresources)
-    return(url_for('landing'))
+    # return(url_for('landing'))
     
     
     
@@ -159,42 +155,23 @@ def resource():
 
     return render_template('resources.html', form=form, resources=resources)
 
-
-
-
-
-
-
-
-
-
-# @app.route('/create-resource', methods=['GET', 'POST'])
-# @login_required
-# def add_resource():
-#     form = forms.ResourceForm()
-#     user = g.user._get_current_object()
-#     resource = models.Resource.get(models.Resource.title == form.title.data)
-
-    
-#     else:
-#         return render_template('create-resource.html', form=form, user=user) 
-
  
-@app.route('/edit-resource/<resource_id>', methods=['GET', 'POST', 'PUT']) 
-@login_required
-def edit_resource():
-    form = forms.EditResourceForm()
+ 
+# @app.route('/edit-resource/<resource_id>', methods=['GET', 'POST', 'PUT']) 
+# @login_required
+# def edit_resource():
+#     form = forms.EditResourceForm()
     
-    if form.validate_on_submit():
-        mdetails = models.User.select().where(models.User.username==current_user.username).get()
-        mdetails.category = form.category.data
-        mdetails.title = form.title.data
-        mdetails.content = form.content.data
-        mdetails.save()
-        user = models.User.select().where(models.User.username==form.username.data).get()
+#     if form.validate_on_submit():
+#         mdetails = models.User.select().where(models.User.username==current_user.username).get()
+#         mdetails.category = form.category.data
+#         mdetails.title = form.title.data
+#         mdetails.content = form.content.data
+#         mdetails.save()
+#         user = models.User.select().where(models.User.username==form.username.data).get()
 
-        return render_template('edit-resource.html', form=form, user=user)
-    return render_template('resource.html', form=form, user=current_user)
+#         return render_template('edit-resource.html', form=form, user=user)
+#     return render_template('resource.html', form=form, user=current_user)
 
 @app.route('/save/<resource_id>', methods=['GET', 'POST'])
 @login_required
@@ -205,8 +182,7 @@ def save_to_profile(resource_id=None):
         models.SavedResources.create(
             user=user.id,
             resource=resource_id)
-        
-        return redirect(url_for('profile', user=g.user._get_current_object()))
+        return redirect(url_for('profile'))
     # if resource_id != None:
     #     user = g.user._get_current_object()
     #     resource = models.Resources.get(models.Resources.id == resource_id) 
@@ -224,9 +200,6 @@ def save_to_profile(resource_id=None):
 @login_required
 def delete_resource(resource_id):
     models.Resources.delete_by_id(int (resource_id)) 
-    
-    
-    
     
     return redirect(url_for('resource'))
 #  return redirect(url_for('resource', resource_id))
