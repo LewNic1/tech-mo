@@ -27,10 +27,10 @@ There were many, but the biggest would be the functionality of being able to sav
 ## **Future Features**
 - Users can edit their posted resources.
 - Create a function where users can directly message each other.
-- Create a social page where users can post memes, comments/questions and reply. 
+- Create a social page where users can post memes, comments/questions. 
 
 ## **Shout-Outs**
 - The instructors Brock, Isha, Dalton and T.A's Gabe and Emily.
-- All my classmates who took the time to break things down for me; explain concepts and walked me through my code. I appreciate all of you!! 
+- All my classmates who took the time to break things down for me; explain concepts and walked me through my code. I appreciate all of you!! For Real, FO REAL!!!
 
 #### Link to user stories, wireframes and ERDs [Trello] (https://trello.com/b/PCK0UsYl/techmo).
