@@ -19,7 +19,8 @@ A user can sign up for a TechMo account, creating their profile and post resourc
 -SQLite DB 
 
 ## **Highlight Feature**
-
+![alt text](https://github.com/LewNic1/tech-mo/blob/master/Screen%20Shot%202019-04-11%20at%209.24.36%20PM.png)
+###Getting a better understanding of templates and seeing it work.
 
 ## **Challenges**
 There were many, but the biggest would be the functionality of being able to save resources to a users profile. With the joining of three tables in the database the challenge of grabing a users selected resource that was posted by another user was a struggle. 
