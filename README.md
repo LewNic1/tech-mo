@@ -19,7 +19,8 @@ A user can sign up for a TechMo account, creating their profile and post resourc
 -SQLite DB 
 
 ## **Highlight Feature**
-### Getting a better understanding of templates and seeing it work.
+### 
+Getting a better understanding of templates and seeing it through.
 ![alt text](https://github.com/LewNic1/tech-mo/blob/master/Screen%20Shot%202019-04-11%20at%209.24.36%20PM.png)
 
 
