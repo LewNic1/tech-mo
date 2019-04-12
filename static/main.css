@@ -190,8 +190,8 @@ main {
 /* Resource Page */
 .bkg-img {
   background-image: url("../static/brooke-cagle-609873-unsplash.jpg");
-  background-size: 20%;
-  background-position: center;
+  background-size: 100%;
+  background-position: right;
   background-repeat: no-repeat;
   width: 600px;
   height: 600px;
