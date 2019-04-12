@@ -11,3 +11,24 @@ A user can sign up for a TechMo account, creating their profile and post resourc
 
 ## **TechMo App**
 ![alt text](https://github.com/LewNic1/tech-mo/blob/master/Screen%20Shot%202019-04-11%20at%207.13.48%20PM.png)
+
+## **Technologies Used**
+- Python
+- Flask
+- Peewee
+-SQLite DB 
+
+## **Highlight Feature**
+
+
+## **Challenges**
+There were many, but the biggest would be the functionality of being able to save resources to a users profile. With the joining of three tables in the database the challenge of grabing a users selected resource that was posted by another user was a struggle. 
+
+## **Future Features**
+- Users can edit their posted resources.
+- Create a function where users can directly message each other.
+- Create a social page where users can post memes, comments/questions and reply. 
+
+## **Shout-Outs**
+- The instructors Brock, Isha, Dalton and T.A's Gabe and Emily.
+- All my classmates who took the time to break things down for me; explain concepts and walked me through my code. I appreciate all of you!! 
