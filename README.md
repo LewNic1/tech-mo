@@ -16,7 +16,9 @@ A user can sign up for a TechMo account, creating their profile and post resourc
 - Python
 - Flask
 - Peewee
--SQLite DB 
+- SQLite DB
+
+ 
 
 ## **Highlight Feature**
 ### 
