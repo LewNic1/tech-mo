@@ -3,8 +3,7 @@ from peewee import *
 
 from flask_login import UserMixin
 from flask_bcrypt import generate_password_hash 
-# import os 
-# from wtforms import SelectField
+
 
 DATABASE = SqliteDatabase('mom.db') #sets db variable for development
 

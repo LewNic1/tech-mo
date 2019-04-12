@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 {% block content %}
-resources page
-<div class ='d-flex flex-row justify-content-between'>
+<h3>Resources</h3>
+<div class ="d-flex flex-column-center">
     <form method='POST'>
         {{ form.hidden_tag() }}
         <div>{{ form.category.label }}</div>
@@ -13,13 +13,17 @@ resources page
         <div>{{ form.submit }}</div> 
     </form>
 
-    <div class = 'd-flex flex-row justify-content-between'>
+    <div class ="d-flex flex-column">
         {% for resource in resources %}
+            
             <div>{{ resource.category }}</div>
+           
             <div>{{ resource.title }}</div>
+           
             <div>{{ resource. content }}</div>
             
-            <a href="{{ url_for('save_to_profile', resource_id=resource.id) }}">Save</a>
+            <a href="{{ url_for('save_to_profile', resource_id=resource.id) }}">SAVE</a>
+            
             <a href="/delete-resource/{{resource.id}}">DELETE</a> 
         {% endfor %}
     </div>

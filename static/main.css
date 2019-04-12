@@ -91,7 +91,7 @@ body {
   }
   
   /* The typing effect */
-  @keyframes typing {
+ @keyframes typing {
     from { width: 0 }
     to { width: 100% }
   }
@@ -146,19 +146,65 @@ body {
   margin-top: 11% !important;
   
 }
+.savedresources {
+  text-align: right;
+}
 
+/* Sticky Footer */
 main {
   min-height: calc(100vh - 70px);
 }
 
 
+/* Profile page */
+.profile-container{
+  background-image: url("../static/aswin-1139736-unsplash.jpg");
+  background-size: 60%;
+  background-repeat: no-repeat;
+  background-position: center;
+  color:darkred;
+  font-weight: 700;
+  font-size: 20px;
+}
 
 
- 
- /* Profile page */
- .profile-container {
-  text-align: left;
+ /* .profile-container {
+  text-align: center;
+  
+ } */
+ h1 {
+   text-align: left;
+ }
+ h2 {
+   text-align: center;
+   font-size: 30px;
+ }
+ .column {
+   text-align: left;
+   margin: 6px;
  }
 .savedresources {
+  text-align: center;
+  padding: 20px;
+}
+.working {
+  width:50px;
+}
 
+
+/* Resource Page */
+.main {
+  background-image: url("static/brooke-cagle-609873-unsplash.jpg")
+}
+.form-method {
+  font-size: 23px;
+  margin: 26px;
+  
+}
+h3 {
+  font-size: 30px;
+  text-align: center;
+}
+.d-flex {
+  justify-content: space-around;
 }
