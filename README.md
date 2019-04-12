@@ -8,3 +8,6 @@ Techmo was inspired by my experiences at General Assembly Web Immersion Bootcamp
 The users of TechMo are women/moms (of any age and background) in tech bootcamps or working in the tech industry who are interested in building community, support and network.
 ### What can users do?
 A user can sign up for a TechMo account, creating their profile and post resources of any type technical or non-technical for the Techmo community. The user can then save resources to their profiles to keep in their account. The user can also edit their profile if needed.  
+
+## **TechMo App**
+![alt text](http://url/to/img.png)
