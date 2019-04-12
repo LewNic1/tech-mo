@@ -1,4 +1,4 @@
-# **TechMo -TechMoms,TechMore**
+# **TechMo -TechMoms, TechMore**
 
 ## **Project Inspiration**
 Techmo was inspired by my experiences at General Assembly Web Immersion Bootcamp. Trying to balance being a student and motherhood, I found out the struggle is real, REAL quick! The struggle motivated me to create a platform where moms in tech bootcamps and also seasonsed moms working in Tech can join forces to create community in sharing resources, creating study groups, network or even enjoy a happy hour. Working along side other moms who are going through the same struggles provides a sense of hope and motivation to keep pushing through.
@@ -32,3 +32,5 @@ There were many, but the biggest would be the functionality of being able to sav
 ## **Shout-Outs**
 - The instructors Brock, Isha, Dalton and T.A's Gabe and Emily.
 - All my classmates who took the time to break things down for me; explain concepts and walked me through my code. I appreciate all of you!! 
+
+#### Link to user stories, wireframes and ERDs [Trello] (https://trello.com/b/PCK0UsYl/techmo).
