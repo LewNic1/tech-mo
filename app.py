@@ -174,7 +174,13 @@ if __name__ == '__main__':
             user = 1,
             category = 'technical',
             title = 'Flask study group',
-            content = 'Monday 6pm at GA'
+            content = 'Monday 6pm at GA.'
+        )
+        models.Resources.create_resource(
+            user = 2,
+            category = 'non-technical',
+            title = 'Happy Hour',
+            content = 'Friday at 4pm in SF.'
         )
     
     

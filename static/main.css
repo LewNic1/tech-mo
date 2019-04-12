@@ -135,9 +135,17 @@ body {
 
 .about-container {
   display: flex;
+  
 }
- 
+ .about-info {
+  font-size: 20px;
+ }
 
+.about-row {
+  display: flex;
+  margin-top: 15% !important;
+  
+}
 
 main {
   min-height: calc(100vh - 70px);
@@ -152,5 +160,5 @@ main {
   text-align: left;
  }
 .savedresources {
-  
+
 }
