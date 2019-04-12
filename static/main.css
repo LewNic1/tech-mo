@@ -159,19 +159,14 @@ main {
 /* Profile page */
 .profile-container{
   background-image: url("../static/aswin-1139736-unsplash.jpg");
-  background-size: 60%;
+  background-size: 100%;
   background-repeat: no-repeat;
   background-position: center;
-  color:darkred;
+  color: black; 
   font-weight: 700;
   font-size: 20px;
 }
 
-
- /* .profile-container {
-  text-align: center;
-  
- } */
  h1 {
    text-align: left;
  }
@@ -193,9 +188,15 @@ main {
 
 
 /* Resource Page */
-.main {
-  background-image: url("static/brooke-cagle-609873-unsplash.jpg")
+.bkg-img {
+  background-image: url("../static/brooke-cagle-609873-unsplash.jpg");
+  background-size: 20%;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 600px;
+  height: 600px;
 }
+
 .form-method {
   font-size: 23px;
   margin: 26px;
