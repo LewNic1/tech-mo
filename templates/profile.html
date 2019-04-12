@@ -8,20 +8,18 @@
 			<p><span class="location"><medium>Location: {{ user.location }}</medium></span></p>
 			<a href="{{ url_for('edit_profile', username=current_user.username) }}" class="button is-dark">Edit Profile</a>
 
-			<!-- {% with messages = get_flashed_messages(with_categories=True) %}
-				{% if messages %}
-					{% for category, message in messages %}
-						<div class={{category}}>{{ message }}</div>
-					{% endfor %}
-				{% endif %}
-			{% endwith %} -->
+			
 		</div>
 		<div class="column">
 			<div class="title heading"></div>
 				<h1>Resources one</h1> 
 
 				{% for save in savedresources %}
+				<div class="savedresources">
+					<p>{{save.resource.category}}</P>
 					<p>{{save.resource.title}}</p>
+					<P>{{save.resource.content}}</P>
+				</div>
 				{% endfor %}
 			</div>
 		</div>
