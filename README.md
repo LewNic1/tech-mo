@@ -1,7 +1,7 @@
 # **TechMo -TechMoms, TechMore**
 
 ## **Project Inspiration**
-Techmo was inspired by my experiences at General Assembly Web Immersion Bootcamp. Trying to balance being a student and motherhood, I found out the struggle is real, REAL quick! The struggle motivated me to create a platform where moms in tech bootcamps and also seasonsed moms working in Tech can join forces to create community in sharing resources, creating study groups, network or even enjoy a happy hour. Working along side other moms who are going through the same struggles provides a sense of hope and motivation to keep pushing through.
+Techmo was inspired by my experiences at General Assembly Web Immersion Bootcamp. Trying to balance being a student and motherhood, I found out the struggle is real, REAL quick! The struggle motivated me to create a platform where moms in tech bootcamps and also seasoned moms working in Tech can join forces to create community in sharing resources, creating study groups, network or even enjoy a happy hour. Working along side other moms who are going through the same struggles provides a sense of hope and motivation to keep pushing through.
 
 ## **App Summary**
 ### Who is the user?
