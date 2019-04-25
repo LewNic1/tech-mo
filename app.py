@@ -164,32 +164,32 @@ if 'ON_HEROKU' in os.environ:
 
 if __name__ == '__main__':
     models.initialize()
-    try:
-        models.User.create_user(
-           username = 'Nicolette',
-           email = 'Nic@mail.com', 
-           password = 'password',
-           location = 'Oakland'
-        )
+    # try:
+    #     models.User.create_user(
+    #        username = 'Nicolette',
+    #        email = 'Nic@mail.com', 
+    #        password = 'password',
+    #        location = 'Oakland'
+    #     )
 
 
-        models.Resources.create_resource(
-            user = 1,
-            category = 'technical',
-            title = 'Flask study group',
-            content = 'Monday 6pm at GA.'
-        )
-        models.Resources.create_resource(
-            user = 2,
-            category = 'non-technical',
-            title = 'Happy Hour',
-            content = 'Friday at 4pm in SF.'
-        )
+    #     models.Resources.create_resource(
+    #         user = 1,
+    #         category = 'technical',
+    #         title = 'Flask study group',
+    #         content = 'Monday 6pm at GA.'
+    #     )
+    #     models.Resources.create_resource(
+    #         user = 2,
+    #         category = 'non-technical',
+    #         title = 'Happy Hour',
+    #         content = 'Friday at 4pm in SF.'
+    #     )
     
     
     
-    except ValueError:
-        pass 
+    # except ValueError:
+    #     pass 
 
 
     app.run(debug=DEBUG, port=PORT)   

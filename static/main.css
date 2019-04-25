@@ -114,9 +114,18 @@ body {
 }
 .container {
   text-align: center;
-
 }
 
+.about Level-item {
+  padding-top: 26px;
+
+}
+h4 {
+  font-size: 30px;
+}
+p {
+  font-size: 18px;
+}
 
 
  .footer {
