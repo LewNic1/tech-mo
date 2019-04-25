@@ -6,8 +6,8 @@ from flask_login import UserMixin
 from flask_bcrypt import generate_password_hash 
 
 # DATABASE = PostgresqlDatabase('mom') 
-DATABASE = connect(os.environ.get('DATABASE_URL'))
-# DATABASE = SqliteDatabase('mom.db') #sets db variable for development (Sqlite)
+# DATABASE = connect(os.environ.get('DATABASE_URL'))
+DATABASE = SqliteDatabase('mom.db') #sets db variable for development (Sqlite)
 
 class User(UserMixin, Model):
     
